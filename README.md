@@ -8,29 +8,8 @@ A tiny terminal companion that remembers the things you need to do.
 local file, and has opinions about roughly nothing. No accounts, no sync, no
 streaks, no points, no notifications. You type `tuki`, your tasks are there.
 
-```
-   (o.o)  tuki                            ━━━━━━━━━━━━  3/7 done
-
-
-   WORK ──────────────────────────────────────────────── 1/3
-
-     ✓  ship the release notes
-   ▸ ○  write the docs                                    fri
-     ○  reply to sam                                   3d ago
-
-   HOME ──────────────────────────────────────────────── 1/2
-
-     ○  buy oat milk                                 tomorrow
-     ✓  water the plants
-
-   HOBBY ─────────────────────────────────────────────── 1/2
-
-     ○  learn one more chord
-     ✓  finish the zine
-
-
-   ↑/k up • ↓/j down • space done • a add • d delete • ? keys • q quit
-```
+![tuki running in a terminal, with tasks grouped under WORK, HOME, HOBBY and
+MISC, completed ones crossed out, and a 3/8 done counter](docs/screenshot.png)
 
 Completed things stay where they are, crossed out and faded, until you clear
 them. Finishing one gets you a brief, quiet reaction and nothing more.

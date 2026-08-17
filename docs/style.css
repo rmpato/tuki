@@ -245,9 +245,35 @@ h3 {
 .muted { color: var(--faint); font-size: 0.9rem; }
 .small { font-size: 0.85rem; }
 
+/* ------------------------------------------------------- screenshot -- */
+
+.shot-section { padding: 2.5rem 0 0; }
+
+.shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  /* The window's own corners are already rounded in the file, so no border —
+     a frame around a screenshot of a framed window reads as a double edge. */
+  box-shadow: 0 24px 60px -18px rgba(0, 0, 0, 0.6),
+              0 4px 14px -6px rgba(0, 0, 0, 0.4);
+}
+@media (prefers-color-scheme: light) {
+  .shot { box-shadow: 0 24px 60px -20px rgba(60, 45, 20, 0.35),
+                      0 3px 10px -4px rgba(60, 45, 20, 0.2); }
+}
+
+.shot-caption {
+  text-align: center;
+  color: var(--faint);
+  font-size: 0.87rem;
+  margin: 1rem 0 0;
+}
+
 /* ------------------------------------------------------------- demo -- */
 
-.demo-section { padding-top: 1rem; }
+.demo-section { padding-top: 2.5rem; }
 
 .demo {
   position: relative;
