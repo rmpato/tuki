@@ -10,9 +10,12 @@ import (
 	"github.com/rmpato/tuki/internal/tui"
 )
 
-// Version is stamped at build time with -ldflags. When it isn't, tuki asks the
-// Go build info, which is populated by `go install`.
-var Version = ""
+// Version and Commit are stamped at build time with -ldflags. When they
+// aren't, tuki asks the Go build info, which is populated by `go install`.
+var (
+	Version = ""
+	Commit  = ""
+)
 
 func version() string {
 	if Version != "" {
@@ -22,6 +25,20 @@ func version() string {
 		return info.Main.Version
 	}
 	return "dev"
+}
+
+func commit() string {
+	if Commit != "" {
+		return Commit
+	}
+	if info, ok := debug.ReadBuildInfo(); ok {
+		for _, s := range info.Settings {
+			if s.Key == "vcs.revision" {
+				return s.Value
+			}
+		}
+	}
+	return ""
 }
 
 // NewRoot builds the whole command tree.
@@ -69,6 +86,7 @@ Tasks live in one local JSON file. Nothing is sent anywhere.`,
 		newClearCmd(),
 		newTagsCmd(),
 		newPathCmd(),
+		newUpdateCmd(),
 	)
 	return root
 }
@@ -76,5 +94,9 @@ Tasks live in one local JSON file. Nothing is sent anywhere.`,
 // Execute runs tuki, wrapped in fang for the styled help, errors, manpage, and
 // shell completions.
 func Execute(ctx context.Context) error {
-	return fang.Execute(ctx, NewRoot(), fang.WithVersion(version()))
+	opts := []fang.Option{fang.WithVersion(version())}
+	if c := commit(); c != "" {
+		opts = append(opts, fang.WithCommit(c))
+	}
+	return fang.Execute(ctx, NewRoot(), opts...)
 }

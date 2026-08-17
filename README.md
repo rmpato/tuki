@@ -36,16 +36,53 @@ them. Finishing one gets you a brief, quiet reaction and nothing more.
 ## Install
 
 ```sh
+curl -fsSL https://raw.githubusercontent.com/rmpato/tuki/main/install.sh | sh
+```
+
+That fetches the right build for your machine, checks it against the release's
+sha256, installs it to `~/.local/bin`, and adds that directory to your `PATH`
+if it isn't already there. Pass `--dir <path>` to install somewhere else, or
+`--no-modify-path` to leave your shell config alone.
+
+<details>
+<summary>Other ways</summary>
+
+With Go:
+
+```sh
 go install github.com/rmpato/tuki@latest
 ```
 
-Or from a clone:
+This puts `tuki` in `$(go env GOPATH)/bin` — usually `~/go/bin` — which isn't
+on your `PATH` by default. Add it:
+
+```sh
+export PATH="$HOME/go/bin:$PATH"
+```
+
+From a clone:
 
 ```sh
 git clone https://github.com/rmpato/tuki
 cd tuki
 make install
 ```
+
+Or grab a binary straight from the
+[releases page](https://github.com/rmpato/tuki/releases).
+
+</details>
+
+### Keeping it current
+
+```sh
+tuki update
+```
+
+tuki checks GitHub, shows you what's new, and asks before replacing anything.
+The download is verified against the release checksum, and your current binary
+is kept aside until the new one is safely in place. `tuki update --check` just
+reports; `tuki update --yes` skips the question, for scripts.
 
 ## The interface
 
@@ -108,6 +145,7 @@ tuki path
 | `clear`  | remove completed tasks (`--all` for all)    |
 | `tags`   | list the groups you're using                |
 | `path`   | print where your tasks live                 |
+| `update` | check for a newer tuki and install it       |
 
 ### In scripts
 

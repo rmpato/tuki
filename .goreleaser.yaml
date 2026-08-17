@@ -1,0 +1,84 @@
+# Release build for tuki. The archive and checksum names here are load-bearing:
+# install.sh and `tuki update` both construct them, so changing a template means
+# changing internal/update.AssetName and install.sh to match.
+version: 2
+
+project_name: tuki
+
+before:
+  hooks:
+    - go mod tidy
+    - go test ./...
+
+builds:
+  - id: tuki
+    main: .
+    binary: tuki
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ignore:
+      # Nobody is running tuki on a Windows ARM box today.
+      - goos: windows
+        goarch: arm64
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w
+      - -X github.com/rmpato/tuki/internal/cli.Version={{ .Tag }}
+      - -X github.com/rmpato/tuki/internal/cli.Commit={{ .FullCommit }}
+
+archives:
+  - id: tuki
+    ids:
+      - tuki
+    # tuki_0.2.0_darwin_arm64.tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    formats:
+      - tar.gz
+    format_overrides:
+      - goos: windows
+        formats:
+          - zip
+    files:
+      - README.md
+      - LICENSE
+
+checksum:
+  # A fixed name so the installer and updater can always find it.
+  name_template: "checksums.txt"
+  algorithm: sha256
+
+changelog:
+  sort: asc
+  use: github
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+      - Merge pull request
+      - Merge branch
+
+release:
+  draft: false
+  prerelease: auto
+  name_template: "tuki {{ .Tag }}"
+  footer: |
+    ## Install
+
+    ```sh
+    curl -fsSL https://raw.githubusercontent.com/rmpato/tuki/main/install.sh | sh
+    ```
+
+    Or, if you already have tuki:
+
+    ```sh
+    tuki update
+    ```
