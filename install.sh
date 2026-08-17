@@ -217,7 +217,8 @@ detect_platform
 if [ -z "$VERSION" ]; then
 	dim "looking up the latest release..."
 	VERSION="$(latest_version)"
-	[ -n "$VERSION" ] || die "couldn't work out the latest version — try --version v0.1.0"
+	[ -n "$VERSION" ] || die "couldn't work out the latest version.
+  Pass one with --version <tag>, from https://github.com/$REPO/releases"
 fi
 
 # The archive name has to match .goreleaser.yaml's name_template.
