@@ -24,7 +24,7 @@
       <span class="topbar-face" aria-hidden="true">(o.o)</span> tuki
     </a>
     <ul class="topbar-links">
-      <li><a href="#look">screenshot</a></li>
+      <li><a href="#look">look</a></li>
       <li><a href="#try">try it</a></li>
       <li><a href="#install">install</a></li>
       <li><a href="#using">using it</a></li>
@@ -65,13 +65,59 @@
 
 <main>
 
-<!-- ------------------------------------------------------- screenshot -->
+<!-- -------------------------------------------------------- screenshot -->
 <section class="wrap shot-section" id="look">
-  <img class="shot" src="screenshot.png" width="1600" height="1195"
-       alt="tuki running in a terminal window. Tasks are grouped under WORK, HOME, HOBBY
-            and MISC; completed ones are crossed out, due dates sit on the right, and the
-            header reads 3/8 done.">
-  <p class="shot-caption">Everything on one screen, and nothing you didn't ask for.</p>
+  <div class="tabs gallery" data-tabs>
+    <div class="tablist" role="tablist" aria-label="Screens">
+      <button role="tab" aria-selected="true"  data-tab="list">tasks</button>
+      <button role="tab" aria-selected="false" data-tab="add">add</button>
+      <button role="tab" aria-selected="false" data-tab="search">search</button>
+      <button role="tab" aria-selected="false" data-tab="keys">keys</button>
+      <button role="tab" aria-selected="false" data-tab="done">all done</button>
+      <button role="tab" aria-selected="false" data-tab="cli">command line</button>
+    </div>
+
+    <div class="tabpanel" data-panel="list">
+      <img class="shot" src="screenshot.png" width="1600" height="1168"
+           alt="tuki in a terminal. Tasks are grouped under WORK, HOME, HOBBY and
+                MISC; completed ones are crossed out, due dates sit on the right,
+                one is overdue in red, and the header reads 3/8 done.">
+      <p class="shot-caption">Everything on one screen, and nothing you didn't ask for.</p>
+    </div>
+
+    <div class="tabpanel" data-panel="add" hidden>
+      <img class="shot" src="screen-add.png" width="1600" height="1168" loading="lazy"
+           alt="Adding a task: the prompt at the bottom reads email sam #work @fri.">
+      <p class="shot-caption">Press <kbd>a</kbd> and type. The group and the due date can go inline — <code>#work</code>, <code>@fri</code>.</p>
+    </div>
+
+    <div class="tabpanel" data-panel="search" hidden>
+      <img class="shot" src="screen-search.png" width="1600" height="1168" loading="lazy"
+           alt="Searching for the word the, with the list filtered to matching tasks.">
+      <p class="shot-caption"><kbd>/</kbd> filters as you type, across every group at once.</p>
+    </div>
+
+    <div class="tabpanel" data-panel="keys" hidden>
+      <img class="shot" src="screen-keys.png" width="1600" height="1168" loading="lazy"
+           alt="The full key list, showing movement, completing, adding, editing,
+                deleting, undo, tags, due dates, filtering and search.">
+      <p class="shot-caption"><kbd>?</kbd> lists every key there is. It's generated from the bindings, so it can't drift.</p>
+    </div>
+
+    <div class="tabpanel" data-panel="done" hidden>
+      <img class="shot" src="screen-done.png" width="1600" height="1168" loading="lazy"
+           alt="Every task crossed off. The face reads caret-o-caret and the line
+                below says done, done, and done.">
+      <p class="shot-caption">Finish everything and tuki says so, once, and then goes quiet again.</p>
+    </div>
+
+    <div class="tabpanel" data-panel="cli" hidden>
+      <img class="shot" src="screen-cli.png" width="1600" height="889" loading="lazy"
+           alt="A shell session: tuki add with an inline tag and due date, tuki list
+                filtered to open work tasks, and tuki done 2.">
+      <p class="shot-caption">The same tasks from the command line, for scripts, pipes and one-liners.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ------------------------------------------------------------- demo -->
@@ -126,27 +172,21 @@
 <section class="wrap" id="install">
   <div class="section-head">
     <h2>Install</h2>
-    <p>Pick whichever you'd normally reach for.</p>
+    <p>The one-liner at the top of this page is the usual way: it checks the
+    download against the release's own sha256, installs to <code>~/.local/bin</code>,
+    and puts that on your <code>PATH</code>. It takes <code>--dir &lt;path&gt;</code>,
+    <code>--version &lt;tag&gt;</code> and <code>--no-modify-path</code>. If you'd
+    rather not pipe a script:</p>
   </div>
 
   <div class="tabs" data-tabs>
     <div class="tablist" role="tablist">
-      <button role="tab" aria-selected="true" data-tab="curl">script</button>
-      <button role="tab" aria-selected="false" data-tab="go">go</button>
+      <button role="tab" aria-selected="true" data-tab="go">go</button>
       <button role="tab" aria-selected="false" data-tab="src">source</button>
       <button role="tab" aria-selected="false" data-tab="manual">binary</button>
     </div>
 
-    <div class="tabpanel" data-panel="curl">
-<pre><code><span class="c">$</span> curl -fsSL https://raw.githubusercontent.com/rmpato/tuki/main/install.sh | sh</code></pre>
-      <p>Installs to <code>~/.local/bin</code> and adds it to your <code>PATH</code> if it
-      isn't already there. Every download is checked against the release's sha256
-      before anything is written.</p>
-      <p class="muted">Options: <code>--dir &lt;path&gt;</code>,
-      <code>--version &lt;tag&gt;</code>, <code>--no-modify-path</code>.</p>
-    </div>
-
-    <div class="tabpanel" data-panel="go" hidden>
+    <div class="tabpanel" data-panel="go">
 <pre><code><span class="c">$</span> go install github.com/rmpato/tuki@latest</code></pre>
       <p>This lands in <code>$(go env GOPATH)/bin</code> — usually <code>~/go/bin</code>,
       which isn't on your <code>PATH</code> by default. Add it:</p>

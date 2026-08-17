@@ -657,3 +657,16 @@ footer p { margin: 0.3rem 0; font-size: 0.9rem; color: var(--muted); }
 
 .pair-note { margin-top: 1.4rem; color: var(--muted); font-size: .97rem; }
 .pair-note strong { color: var(--text); }
+
+/* --------------------------------------------------------------- gallery --
+   Six real captures behind tabs, in place of the one screenshot that used to
+   sit here. The terminal's background is the page's own --bg, so each image
+   belongs to the page rather than sitting on top of it. */
+
+.gallery .tablist { justify-content: center; margin-bottom: 1.1rem; }
+.gallery .tabpanel { animation: gallery-fade .25s ease both; }
+@keyframes gallery-fade { from { opacity: 0 } to { opacity: 1 } }
+
+.gallery .shot { margin-bottom: 0; }
+.gallery .shot-caption { margin-top: .9rem; }
+.gallery kbd { font-size: .82em; }
