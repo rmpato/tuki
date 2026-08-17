@@ -18,7 +18,23 @@
 
 <a class="skip" href="#install">Skip to install</a>
 
-<header class="hero">
+<nav class="topbar" id="topbar" aria-label="Sections">
+  <div class="topbar-inner">
+    <a class="topbar-brand" href="#top">
+      <span class="topbar-face" aria-hidden="true">(o.o)</span> tuki
+    </a>
+    <ul class="topbar-links">
+      <li><a href="#look">screenshot</a></li>
+      <li><a href="#try">try it</a></li>
+      <li><a href="#install">install</a></li>
+      <li><a href="#using">using it</a></li>
+      <li><a href="#why">why</a></li>
+    </ul>
+    <a class="topbar-gh" href="https://github.com/rmpato/tuki">GitHub</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
   <div class="wrap">
     <div class="mascot" aria-hidden="true">
       <span class="brow left"></span><span class="brow right"></span>
@@ -49,7 +65,7 @@
 <main>
 
 <!-- ------------------------------------------------------- screenshot -->
-<section class="wrap shot-section">
+<section class="wrap shot-section" id="look">
   <img class="shot" src="screenshot.png" width="1600" height="1195"
        alt="tuki running in a terminal window. Tasks are grouped under WORK, HOME, HOBBY
             and MISC; completed ones are crossed out, due dates sit on the right, and the
@@ -58,7 +74,7 @@
 </section>
 
 <!-- ------------------------------------------------------------- demo -->
-<section class="wrap demo-section">
+<section class="wrap demo-section" id="try">
   <div class="section-head">
     <h2>Try it here</h2>
     <p>This is the real interface, rebuilt in the page. Use it with the keyboard.</p>
@@ -163,7 +179,7 @@
 </section>
 
 <!-- -------------------------------------------------------------- use -->
-<section class="wrap">
+<section class="wrap" id="using">
   <div class="section-head">
     <h2>Using it</h2>
     <p>Type <code>tuki</code> and your tasks are there. That's the whole idea.</p>
@@ -201,7 +217,7 @@
 </section>
 
 <!-- ------------------------------------------------------- philosophy -->
-<section class="philosophy">
+<section class="philosophy" id="why">
   <div class="wrap">
   <div class="section-head">
     <h2>What tuki doesn't do</h2>
@@ -232,7 +248,7 @@
 </section>
 
 <!-- ------------------------------------------------------------ built -->
-<section class="wrap built">
+<section class="wrap built" id="built">
   <div class="section-head">
     <h2>Built with</h2>
   </div>
@@ -256,6 +272,7 @@
       <a href="https://github.com/rmpato/tuki/blob/main/LICENSE">MIT</a>
     </p>
     <p class="muted small">made for terminals, and the people in them</p>
+    <p><a class="totop" href="#top">↑ back to top</a></p>
   </div>
 </footer>
 
