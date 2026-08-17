@@ -1,8 +1,21 @@
-# Regenerate the screenshot
+# Regenerate the screenshots
 
-`docs/screenshot.png` is a real capture of tuki in a Ghostty window. It's used
-by both the README and the site. This is fiddlier than it looks, so the
-gotchas are worth reading first.
+The site shows six real captures of tuki in a Ghostty window — the list, the
+add prompt, search, the key list, everything crossed off, and a shell session.
+`docs/screenshot.png` is the first of them, and the README uses it too.
+
+## Just run the script
+
+```sh
+./tools/screenshots.sh
+```
+
+That builds tuki, seeds two throwaway task files, opens a second Ghostty
+window, drives it through each screen, and closes only the window it opened.
+Six files land in `docs/`.
+
+Read the rest anyway — it's why the script is shaped the way it is, and you'll
+want it if you change what gets captured.
 
 ## Rules
 

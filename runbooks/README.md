@@ -6,7 +6,7 @@ Step-by-step for the things that aren't obvious from the code.
 | --- | --- |
 | [release.md](release.md) | cutting a new version |
 | [website.md](website.md) | changing or redeploying the site |
-| [screenshot.md](screenshot.md) | regenerating the terminal screenshot |
+| [screenshot.md](screenshot.md) | regenerating the screenshots (`./tools/screenshots.sh`) |
 | [develop.md](develop.md) | building, testing, and finding your way around |
 
 Each one lists what to run, how to check it worked, and how to undo it.

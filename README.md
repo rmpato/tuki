@@ -210,7 +210,8 @@ make check   # fmt, vet, and test
 ```
 
 [`runbooks/`](runbooks/) has step-by-step for cutting a release, redeploying
-the site, regenerating the screenshot, and finding your way around the code.
+the site, regenerating the screenshots (`./tools/screenshots.sh`), and finding
+your way around the code.
 
 </details>
 
