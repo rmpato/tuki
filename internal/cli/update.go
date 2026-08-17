@@ -101,20 +101,46 @@ replacing is kept aside until the new one is in place.
 	return cmd
 }
 
-// notesPreview trims release notes down to something that fits on screen
-// without turning the confirmation into a wall of text.
+// notesPreview turns GitHub's markdown release notes into a few plain lines.
+// Fenced code blocks and headings are dropped: what's wanted before an update
+// is the gist, not the release page rendered badly in a terminal.
 func notesPreview(notes string, max int) []string {
+	const width = 68
+
 	var out []string
+	var inFence bool
+
 	for _, line := range strings.Split(notes, "\n") {
 		line = strings.TrimSpace(line)
+
+		if strings.HasPrefix(line, "```") {
+			inFence = !inFence
+			continue
+		}
+		if inFence || line == "" || strings.HasPrefix(line, "#") {
+			continue
+		}
+
+		// "* abcdef123: Did a thing (@someone)" reads better as "· Did a thing".
+		line = strings.TrimLeft(line, "*-+ ")
+		if i := strings.Index(line, ": "); i > 0 && i < 48 && !strings.Contains(line[:i], " ") {
+			line = line[i+2:]
+		}
+		if i := strings.LastIndex(line, " (@"); i > 0 && strings.HasSuffix(line, ")") {
+			line = line[:i]
+		}
 		if line == "" {
 			continue
 		}
+
+		if len(line) > width {
+			line = line[:width-1] + "…"
+		}
 		if len(out) == max {
-			out = append(out, "…")
+			out = append(out, "· …")
 			break
 		}
-		out = append(out, line)
+		out = append(out, "· "+line)
 	}
 	return out
 }

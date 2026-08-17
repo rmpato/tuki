@@ -2,6 +2,8 @@
 
 A tiny terminal companion that remembers the things you need to do.
 
+**[rmpato.github.io/tuki](https://rmpato.github.io/tuki/)** — try the interface in your browser.
+
 `tuki` is a todo app that fits in one small window, keeps everything in one
 local file, and has opinions about roughly nothing. No accounts, no sync, no
 streaks, no points, no notifications. You type `tuki`, your tasks are there.

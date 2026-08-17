@@ -282,3 +282,38 @@ func TestUnknownCommandFails(t *testing.T) {
 		t.Error("an unknown command should fail")
 	}
 }
+
+func TestNotesPreviewStripsMarkdown(t *testing.T) {
+	notes := "## Changelog\n" +
+		"* 37ba49827febfc12a7a9af6243c87528cbb71127: Add releases and self-update (@rmpato)\n" +
+		"* deadbeef: Fix a thing (@someone)\n" +
+		"\n## Install\n\n```sh\ncurl -fsSL https://example.test/install.sh | sh\n```\n" +
+		"Some trailing prose.\n"
+
+	got := notesPreview(notes, 8)
+	want := []string{
+		"· Add releases and self-update",
+		"· Fix a thing",
+		"· Some trailing prose.",
+	}
+
+	if len(got) != len(want) {
+		t.Fatalf("got %d lines %q, want %d", len(got), got, len(want))
+	}
+	for i := range want {
+		if got[i] != want[i] {
+			t.Errorf("line %d = %q, want %q", i, got[i], want[i])
+		}
+	}
+}
+
+func TestNotesPreviewCaps(t *testing.T) {
+	var b strings.Builder
+	for i := 0; i < 30; i++ {
+		b.WriteString("* a note\n")
+	}
+	got := notesPreview(b.String(), 5)
+	if len(got) != 6 || got[5] != "· …" {
+		t.Errorf("expected 5 lines plus an ellipsis, got %d: %q", len(got), got)
+	}
+}
