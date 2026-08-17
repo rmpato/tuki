@@ -1,0 +1,10 @@
+# Build output
+/tuki
+/dist/
+
+# Test and coverage artifacts
+*.out
+*.test
+
+# macOS
+.DS_Store
