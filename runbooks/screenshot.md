@@ -8,6 +8,14 @@ gotchas are worth reading first.
 
 - **Never use your own tasks.** Point tuki at a throwaway file with
   `TUKI_HOME`. Your real list stays untouched and out of the picture.
+- **Set the terminal background to tuki's page background** — `#14120f`, with
+  `#e8e3da` in front of it. Ghostty's default is nearly black, which sits on
+  the site as a colder, darker rectangle instead of belonging to it. mori's
+  screenshot does the same with its own `#111410`.
+- **Never `pkill` Ghostty to avoid the tab problem.** If you're running inside
+  Ghostty — and if you're reading this in a terminal, you probably are — that
+  takes your shell and anything running in it with you. Open a second instance
+  and close it by PID. See the gotchas.
 - **84×27 cells.** Wide enough for tuki's 76-column layout with a margin,
   27 rows so all four groups fit without scrolling. Recount if you change the
   demo tasks: header 4 + footer 2 + 5 lines per group + 1 per task.
@@ -53,32 +61,46 @@ command = $WORK/run.sh
 window-save-state = never
 window-width = 84
 window-height = 27
-font-size = 22
+window-position-x = 120
+window-position-y = 120
+font-size = 20
 window-padding-x = 18
 window-padding-y = 16
+background = #14120f
+foreground = #e8e3da
 title = tuki
 EOF
 
-pkill -9 -f "MacOS/ghostty"; sleep 2
+BEFORE=$(ps -Ao pid,comm | grep 'MacOS/ghostty' | awk '{print $1}' | tr '\n' '|' | sed 's/|$//')
 open -na Ghostty --args --config-file="$WORK/ghostty.conf"
-sleep 5
-screencapture -x -o -D 1 "$WORK/full.png"     # -D picks the display
+sleep 6
+PID=$(ps -Ao pid,comm | grep 'MacOS/ghostty' | awk '{print $1}' | grep -vE "^(${BEFORE})$" | head -1)
 ```
 
-Then crop to the window, scale to 1600px wide, and round the corners:
+Ask macOS where that window is, rather than measuring it by hand, and capture
+exactly that rectangle — nothing else on your screen ends up in the file:
 
 ```sh
-sips --cropOffset <Y> <X> -c <H> <W> "$WORK/full.png" --out "$WORK/crop.png"
-sips -Z 1600 "$WORK/crop.png" --out docs/screenshot.png
-sips -s format bmp docs/screenshot.png --out /tmp/shot.bmp
-python3 tools/round_corners.py /tmp/shot.bmp docs/screenshot.png 14
+osascript -e "tell application \"System Events\" to tell (first process whose unix id is $PID) \
+  to get {position, size} of front window"
+# 120, 158, 1044, 762
+
+screencapture -x -o -R 120,158,1044,762 "$WORK/win.png"
 ```
 
-Finally, **delete the full-screen capture** — it has your whole desktop in it:
+Then scale to 1600px wide and round the corners:
 
 ```sh
-rm -rf "$WORK" /tmp/shot.bmp
-pkill -9 -f "MacOS/ghostty"
+sips -Z 1600 "$WORK/win.png" --out "$WORK/scaled.png"
+sips -s format bmp "$WORK/scaled.png" --out "$WORK/scaled.bmp"
+python3 tools/round_corners.py "$WORK/scaled.bmp" docs/screenshot.png 14
+```
+
+Finally, close **only your window**:
+
+```sh
+kill "$PID"
+rm -rf "$WORK"
 ```
 
 ## Gotchas
@@ -92,13 +114,16 @@ script.sh` raises a macOS "Allow Ghostty to execute…" dialog, which lands on
 top of the window you're trying to photograph. `command =` in a config file
 doesn't.
 
-**Quit Ghostty completely first.** Otherwise the new window opens as a *tab*
-in the existing one, and the tab bar steals two rows.
+**Don't quit Ghostty to avoid the tab problem.** `open -na` opens a separate
+instance, which is enough; close that one by PID. Quitting takes your own
+session with it.
 
-**The window may open on another display or Space.** `screencapture` only sees
-one display at a time; try `-D 1`, `-D 2`, `-D 3`. On a non-Retina external
-monitor the result is half the resolution — prefer the built-in display, or
-double `font-size` to compensate.
+**Capture the window, not the screen.** `screencapture` with no `-R` takes the
+whole display, which means a file containing your desktop that you then have
+to remember to delete. Asking System Events for the window rect means that
+file never exists — and it works even when the window opens on another
+display, where the coordinates come back negative and `-R` handles them
+anyway.
 
 **Round the corners.** The window's own rounded corners let a sliver of
 whatever was behind show through at each corner. `tools/round_corners.py`
@@ -108,6 +133,8 @@ can't fix it with CSS the way the site can.
 ## Check
 
 - 1600px wide, a couple of hundred KB at most.
+- The background matches the site's `--bg`. Sample a pixel if unsure; it
+  should read `#14120f`, not near-black.
 - All four group headings present, and the footer key hints visible.
 - Corners transparent, no desktop showing.
 - Nothing of yours in the frame.

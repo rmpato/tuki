@@ -623,3 +623,37 @@ footer {
   margin-bottom: 0.8rem;
 }
 footer p { margin: 0.3rem 0; font-size: 0.9rem; color: var(--muted); }
+
+
+/* --------------------------------------------------------------- sibling --
+   tuki's other half. The palette borrows mori's green for its side, so the
+   two sites tell the same story in the same colours. */
+
+.sibling { padding: 3rem 0 1rem; }
+
+.pair {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-top: 1.5rem;
+}
+@media (min-width: 40rem) { .pair { grid-template-columns: 1fr 1fr; } }
+
+.pair > div { padding: 1.6rem 1.5rem; background: var(--bg-soft); }
+.pair > div + div { border-top: 1px solid var(--line); }
+@media (min-width: 40rem) {
+  .pair > div + div { border-top: 0; border-left: 1px solid var(--line); }
+}
+
+.pair-face { font-family: var(--mono); font-size: .8rem; color: var(--faint); }
+.pair h3 { margin: .4rem 0 .15rem; font-size: 1.5rem; }
+.pair .is-tuki h3 { color: var(--brand); }
+.pair .is-mori h3 a { color: #86c79a; text-decoration: none; }
+.pair .is-mori h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.pair-q { font-style: italic; color: var(--text); margin: 0 0 .5rem; }
+.pair p { font-size: .95rem; color: var(--muted); }
+
+.pair-note { margin-top: 1.4rem; color: var(--muted); font-size: .97rem; }
+.pair-note strong { color: var(--text); }
