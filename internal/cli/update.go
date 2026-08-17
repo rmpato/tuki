@@ -117,7 +117,17 @@ func notesPreview(notes string, max int) []string {
 			inFence = !inFence
 			continue
 		}
-		if inFence || line == "" || strings.HasPrefix(line, "#") {
+		if strings.HasPrefix(line, "#") {
+			// A heading before anything else is the changelog's own ("##
+			// Changelog"). A heading after it starts a different section —
+			// the install boilerplate we append to every release — and none
+			// of that belongs in a terminal.
+			if len(out) > 0 {
+				break
+			}
+			continue
+		}
+		if inFence || line == "" {
 			continue
 		}
 

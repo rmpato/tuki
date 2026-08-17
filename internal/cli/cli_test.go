@@ -291,10 +291,12 @@ func TestNotesPreviewStripsMarkdown(t *testing.T) {
 		"Some trailing prose.\n"
 
 	got := notesPreview(notes, 8)
+	// Everything from the "## Install" heading onward is boilerplate appended
+	// to every release, so it stops there rather than trailing prose into the
+	// terminal.
 	want := []string{
 		"· Add releases and self-update",
 		"· Fix a thing",
-		"· Some trailing prose.",
 	}
 
 	if len(got) != len(want) {
@@ -315,5 +317,13 @@ func TestNotesPreviewCaps(t *testing.T) {
 	got := notesPreview(b.String(), 5)
 	if len(got) != 6 || got[5] != "· …" {
 		t.Errorf("expected 5 lines plus an ellipsis, got %d: %q", len(got), got)
+	}
+}
+
+// Notes with no headings at all should still come through.
+func TestNotesPreviewWithoutHeadings(t *testing.T) {
+	got := notesPreview("just one line about the release\n", 5)
+	if len(got) != 1 || got[0] != "· just one line about the release" {
+		t.Errorf("notesPreview = %q", got)
 	}
 }
