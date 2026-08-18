@@ -66,7 +66,7 @@
 <main>
 
 <!-- -------------------------------------------------------- screenshot -->
-<section class="wrap shot-section" id="look">
+<section class="wide shot-section" id="look">
   <div class="tabs gallery" data-tabs>
     <div class="tablist" role="tablist" aria-label="Screens">
       <button role="tab" aria-selected="true"  data-tab="list">tasks</button>
@@ -121,7 +121,7 @@
 </section>
 
 <!-- ------------------------------------------------------------- demo -->
-<section class="wrap demo-section" id="try">
+<section class="wide demo-section" id="try">
   <div class="section-head">
     <h2>Try it here</h2>
     <p>This is the real interface, rebuilt in the page. Use it with the keyboard.</p>
@@ -236,7 +236,7 @@
   <p>When output isn't a terminal, <code>tuki list</code> switches to tab-separated
   columns — <code>id</code>, <code>done|todo</code>, <code>tag</code>,
   <code>due</code>, <code>text</code>. So the usual things just work:</p>
-<pre class="wide"><code><span class="c">$</span> tuki list | awk -F'\t' '$2 == "todo" { print $5 }'
+<pre class="overflows"><code><span class="c">$</span> tuki list | awk -F'\t' '$2 == "todo" { print $5 }'
 <span class="c">$</span> tuki list --json | jq '.[] | select(.tag == "work")'
 <span class="c">$</span> tuki list --todo --tag work | wc -l</code></pre>
   <p class="muted">Running bare <code>tuki</code> in a pipe lists too, rather than
@@ -275,7 +275,7 @@
 </section>
 
 <!-- ----------------------------------------------------------- sibling -->
-<section class="wrap sibling" id="mori">
+<section class="wide sibling" id="mori">
   <div class="section-head">
     <h2>tuki has a sibling</h2>
     <p>Same design language, opposite direction.</p>

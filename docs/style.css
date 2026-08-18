@@ -21,7 +21,17 @@
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto,
           "Helvetica Neue", Arial, sans-serif;
 
-  --col: 46rem;
+
+  /* Layout is shared with mori, so the two pages sit on one grid: the same
+     reading measure, the same wide column for screens and grids, the same
+     gutter, and the same vertical rhythm. Only the palette and the type are
+     meant to tell them apart. */
+  --gutter:  1.5rem;
+  --measure: 40rem;   /* prose */
+  --wide:    60rem;   /* galleries, screens, grids */
+  --space:   3.5rem;  /* the vertical rhythm unit */
+  --hero:    5.5rem;  /* above the masthead */
+  --col: var(--measure);
 
   /* Shapes are shared with mori so the two read as siblings. The palette and
      the typography are what tell them apart; the geometry shouldn't. */
@@ -73,11 +83,20 @@ body {
 
 .wrap {
   width: 100%;
-  max-width: var(--col);
+  max-width: var(--measure);
   margin: 0 auto;
   /* Inline only: a shorthand here would flatten the vertical padding that
      sections set, and several sections are themselves .wrap elements. */
-  padding-inline: 1.5rem;
+  padding-inline: var(--gutter);
+}
+
+/* The wide column: screenshots, the demo, and the pair. Same width as mori's,
+   so a screenshot is the same size on both sites. */
+.wide {
+  width: 100%;
+  max-width: var(--wide);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
 }
 
 a { color: var(--brand); text-decoration-color: color-mix(in srgb, var(--brand) 35%, transparent); text-underline-offset: 3px; }
@@ -209,7 +228,7 @@ pre .c { color: var(--faint); user-select: none; }
 /* ------------------------------------------------------------- hero -- */
 
 .hero {
-  padding: 5.5rem 0 4rem;
+  padding: var(--hero) 0 4rem;
   text-align: center;
   background:
     radial-gradient(ellipse 60% 55% at 50% -10%,
@@ -325,7 +344,7 @@ pre .c { color: var(--faint); user-select: none; }
 
 /* --------------------------------------------------------- sections -- */
 
-section { padding: 3.5rem 0; }
+section { padding: var(--space) 0; }
 
 .section-head { margin-bottom: 1.8rem; }
 .section-head h2 {
@@ -348,7 +367,7 @@ h3 {
 
 /* ------------------------------------------------------- screenshot -- */
 
-.shot-section { padding: 2.5rem 0 0; }
+.shot-section { padding: calc(var(--space) * .7) 0 0; }
 
 .shot {
   display: block;
@@ -558,7 +577,7 @@ kbd {
 .two-up h3:first-child { margin-top: 0; }
 @media (max-width: 40rem) { .two-up { grid-template-columns: 1fr; } }
 
-pre.wide { font-size: 0.95em; }
+pre.overflows { font-size: 0.95em; }
 
 /* ------------------------------------------------------- philosophy -- */
 
