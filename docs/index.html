@@ -154,27 +154,13 @@
     </div>
   </div>
 
-  <ul class="keylist">
-    <li><kbd>↑</kbd><kbd>↓</kbd><kbd>k</kbd><kbd>j</kbd><span>move</span></li>
-    <li><kbd>space</kbd><span>complete</span></li>
-    <li><kbd>a</kbd><span>add</span></li>
-    <li><kbd>e</kbd><span>edit</span></li>
-    <li><kbd>d</kbd><span>delete</span></li>
-    <li><kbd>u</kbd><span>undo</span></li>
-    <li><kbd>t</kbd><span>change group</span></li>
-    <li><kbd>/</kbd><span>search</span></li>
-    <li><kbd>tab</kbd><span>filter</span></li>
-    <li><kbd>?</kbd><span>every key</span></li>
-  </ul>
 </section>
 
 <!-- ---------------------------------------------------------- install -->
 <section class="wrap" id="install">
   <div class="section-head">
     <h2>Install</h2>
-    <p>The one-liner at the top of this page is the usual way: it checks the
-    download against the release's own sha256, installs to <code>~/.local/bin</code>,
-    and puts that on your <code>PATH</code>. It takes <code>--dir &lt;path&gt;</code>,
+    <p>The one-liner at the top takes <code>--dir &lt;path&gt;</code>,
     <code>--version &lt;tag&gt;</code> and <code>--no-modify-path</code>. If you'd
     rather not pipe a script:</p>
   </div>
@@ -214,8 +200,8 @@
     <h3>Staying current</h3>
 <pre><code><span class="c">$</span> tuki update</code></pre>
     <p>tuki checks for a newer version, shows you what changed, and
-    <strong>asks before replacing anything</strong>. The download is verified, and
-    your current binary is kept aside until the new one is safely in place.</p>
+    <strong>asks before replacing anything</strong>. Your current binary is kept
+    aside until the new one is safely in place.</p>
   </div>
 </section>
 

@@ -336,7 +336,7 @@
       bar.classList.add("show");
     }
 
-    var sections = ["look", "try", "install", "using", "why"]
+    var sections = ["look", "try", "install", "using", "why", "mori"]
       .map(function (id) { return document.getElementById(id); })
       .filter(Boolean);
 
