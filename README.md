@@ -1,5 +1,10 @@
 # tuki
 
+[![ci](https://github.com/rmpato/tuki/actions/workflows/ci.yml/badge.svg)](https://github.com/rmpato/tuki/actions/workflows/ci.yml)
+[![release](https://img.shields.io/github/v/release/rmpato/tuki?color=b4852f&label=release)](https://github.com/rmpato/tuki/releases)
+[![go report](https://goreportcard.com/badge/github.com/rmpato/tuki)](https://goreportcard.com/report/github.com/rmpato/tuki)
+[![license](https://img.shields.io/badge/license-MIT-b4852f)](LICENSE)
+
 > What do I need to do?
 
 A tiny terminal companion that remembers the things you need to do. One local
@@ -76,3 +81,10 @@ are open and pointed forwards, mori's are closed and pointed back.
 [runbooks](runbooks/) ·
 [releases](https://github.com/rmpato/tuki/releases) ·
 [MIT](LICENSE)
+
+## Contributing
+
+Bug reports and ideas are welcome — [CONTRIBUTING.md](CONTRIBUTING.md) says how
+things are built and which ideas get turned down, so a no is never a surprise.
+Vulnerabilities go through [private reporting](https://github.com/rmpato/tuki/security/advisories/new),
+not public issues: [SECURITY.md](SECURITY.md).

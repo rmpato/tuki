@@ -1,0 +1,22 @@
+name: Idea
+description: Something tuki could do
+labels: [idea]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Tuki is small on purpose. [CONTRIBUTING.md](https://github.com/rmpato/tuki/blob/main/CONTRIBUTING.md)
+        lists the kinds of idea that get turned down — worth a look first, so a
+        no isn't a surprise.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's the problem
+      description: What are you trying to do that tuki makes hard?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What might solve it
+      description: If you have something in mind. It's fine if you don't.

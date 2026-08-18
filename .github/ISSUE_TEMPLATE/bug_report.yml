@@ -1,0 +1,40 @@
+name: Bug report
+description: Something tuki does that it shouldn't
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please don't paste anything private. A redacted example of
+        a task you wrote is always enough.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: And what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: How to reproduce it
+      placeholder: |
+        1. tuki_home...
+        2. ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: The output of `tuki --version`.
+      placeholder: v0.1.0 (abc1234)
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: OS and terminal
+      placeholder: macOS 15, Ghostty 1.3
+    validations:
+      required: true

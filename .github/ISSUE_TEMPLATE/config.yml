@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: How tuki works
+    url: https://rmpato.github.io/tuki/
+    about: Install, the keys, and what each screen does.
+  - name: Design notes
+    url: https://github.com/rmpato/tuki/blob/main/runbooks/develop.md
+    about: Why tuki is built the way it is, before proposing a change to it.
+  - name: Report a vulnerability
+    url: https://github.com/rmpato/tuki/security/advisories/new
+    about: Privately, not as a public issue.

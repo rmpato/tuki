@@ -46,7 +46,9 @@ func newHarness(t *testing.T, seed func(*store.Data)) *harness {
 // panics still fails the test. Commands are capped at a short timeout because
 // several of them are timers that would otherwise sleep for seconds; the
 // resulting message is discarded, since every assertion here is about state
-// that Update sets synchronously.
+// that Update sets synchronously. The cap only has to be much longer than the
+// work and much shorter than the timers, and a shared CI runner is slower at
+// the first of those than a laptop is.
 func (h *harness) send(msg tea.Msg) {
 	h.t.Helper()
 	model, cmd := h.m.Update(msg)
@@ -61,7 +63,7 @@ func (h *harness) send(msg tea.Msg) {
 	}()
 	select {
 	case <-done:
-	case <-time.After(20 * time.Millisecond):
+	case <-time.After(50 * time.Millisecond):
 	}
 }
 
